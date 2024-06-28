@@ -1,15 +1,16 @@
-import { useEffect, useState } from 'react';
-import { MainContract } from '@my_first_contract/contracts/wrappers/MainContract';
-import { useTonClient } from './useTonClient';
-import { useAsyncInitialize } from './useAsyncInitialize';
-import { Address, OpenedContract, toNano } from '@ton/core';
-import { useTonConnect } from './useTonConnect';
+import { useEffect, useState } from "react";
+import { MainContract } from "@my_first_contract/contracts/wrappers/MainContract";
+import { useTonClient } from "./useTonClient";
+import { useAsyncInitialize } from "./useAsyncInitialize";
+import { Address, OpenedContract, toNano } from "@ton/core";
+import { useTonConnect } from "./useTonConnect";
 
 export function useMainContract() {
   const client = useTonClient();
   const { sender } = useTonConnect();
-    
-  const sleep = (time: number) => new Promise((resolve) => setTimeout(resolve, time));
+
+  const sleep = (time: number) =>
+    new Promise((resolve) => setTimeout(resolve, time));
 
   const [contractData, setContractData] = useState<null | {
     counter_value: number;
@@ -22,7 +23,7 @@ export function useMainContract() {
   const mainContract = useAsyncInitialize(async () => {
     if (!client) return;
     const contract = new MainContract(
-      Address.parse("EQAzY2TUJzRavAQ80GUKERW_zxUaWRr_DnNzSxq55i5K6Oo8")
+      Address.parse("EQAzY2TUJzRavAQ80GUKERW_zxUaWRr_DnNzSxq55i5K6Oo8"),
     );
     return client.open(contract) as OpenedContract<MainContract>;
   }, [client]);
@@ -53,10 +54,14 @@ export function useMainContract() {
       return mainContract?.sendIncrement(sender, toNano(0.01), 3);
     },
     sendDeposit: () => {
-        return mainContract?.sendDeposit(sender, toNano(0.01));
+      return mainContract?.sendDeposit(sender, toNano(0.01));
     },
     sendWithdrawalRequest: () => {
-        return mainContract?.sendWithdrawalRequest(sender, toNano(0.01), toNano(0.001));
+      return mainContract?.sendWithdrawalRequest(
+        sender,
+        toNano(0.01),
+        toNano(0.001),
+      );
     },
   };
 }
