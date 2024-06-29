@@ -3,7 +3,7 @@ import { TonConnectButton } from "@tonconnect/ui-react";
 import { useMainContract } from "./hooks/useMainContract";
 import { useTonConnect } from "./hooks/useTonConnect";
 import { fromNano } from "@ton/core";
-import WebApp  from "@twa-dev/sdk";
+import WebApp from "@twa-dev/sdk";
 
 // EQDp5CTd1FkTmN0dS6pd9ZfpPDm4jWyoP_iRsojxhBisdtlp owner
 // EQAzY2TUJzRavAQ80GUKERW_zxUaWRr_DnNzSxq55i5K6Oo8 contract
@@ -32,13 +32,13 @@ function App() {
         <TonConnectButton />
       </div>
       <div>
-        <div className='Card'>
+        <div className="Card">
           <b>{WebApp.platform}</b>
           <b>Our contract Address</b>
-          <div className='Hint'>{contract_address?.slice(0, 30) + "..."}</div>
+          <div className="Hint">{contract_address?.slice(0, 30) + "..."}</div>
           <b>Our contract Balance</b>
           {contract_balance && (
-            <div className= 'Hint'>{fromNano(contract_balance)}</div>
+            <div className="Hint">{fromNano(contract_balance)}</div>
           )}
         </div>
 
